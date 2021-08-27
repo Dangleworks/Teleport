@@ -1,13 +1,23 @@
 zones = {}
 aliases = {}
 tpq = {}
-
+ui_id = 0
 function onCreate(is_world_create)
+	ui_id = server.getMapID()
 	zones = server.getZones("type=teleport")
 	for i,e in ipairs(zones) do
+		local x,y,z = matrix.position(e.transform)
+		server.addMapLabel(-1, ui_id, 11, e.name, x, z)
 		for ti=2,#e.tags,1 do
 			aliases[e.tags[ti]] = i
 		end
+	end
+end
+
+function onPlayerJoin(steam_id, name, peer_id, is_admin, is_auth)
+	for i,e in ipairs(zones) do
+		local x,y,z = matrix.position(e.transform)
+		server.addMapLabel(-1, ui_id, 11, e.name, x, z)
 	end
 end
 
