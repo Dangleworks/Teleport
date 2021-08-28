@@ -17,7 +17,7 @@ end
 function onPlayerJoin(steam_id, name, peer_id, is_admin, is_auth)
 	for i,e in ipairs(zones) do
 		local x,y,z = matrix.position(e.transform)
-		server.addMapLabel(-1, ui_id, 11, e.name, x, z)
+		server.addMapLabel(peer_id, ui_id, 11, e.name, x, z)
 	end
 end
 
